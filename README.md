@@ -8,4 +8,4 @@
 1. Unzip file
 2. Launch start.py
 3. Input how many codes to generate
-4. Wait
+4. Wait...
