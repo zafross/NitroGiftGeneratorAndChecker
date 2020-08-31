@@ -1,5 +1,4 @@
 # NitroGENERATOR+CHECKER for discord
-Nitro generator + checker  for  discord
 
 
 How use it?
