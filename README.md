@@ -3,8 +3,8 @@
 😮223 gift codes / per 1 minute
 
 
-❓❓❓❓❓
-How use it?
+
+❓  How use it?
 1. Unzip NitroGiftGeneratorAndChecker-master.zip 
 2. Launch start.py
 3. Input how many codes to generate
