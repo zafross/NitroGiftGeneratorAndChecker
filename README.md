@@ -5,7 +5,7 @@
 
 
 ❓  How use it?
-1. Unzip NitroGiftGeneratorAndChecker-master.zip 
+1. Unzip <filename>.zip 
 2. Launch start.py
 3. Input how many codes to generate
 4. Wait
