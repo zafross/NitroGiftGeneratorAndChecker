@@ -1,6 +1,7 @@
 😎 ℕ𝕚𝕥𝕣𝕠 ℂ𝕠𝕕𝕖 𝔾𝕖𝕟𝕖𝕣𝕒𝕥𝕠𝕣 + 𝕔𝕙𝕖𝕔𝕜𝕖𝕣
 
-😮 223 gift codes / per 1 minute
+😮 500 gift codes / per 1 minute
+✅ verified by users
 
 
 
