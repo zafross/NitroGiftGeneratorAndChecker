@@ -57,6 +57,8 @@ with open("Nitro Codes.txt") as f:
 
         if r.status_code == 200:
             print(" Valid | {} ".format(line.strip("\n")))
+            c = open("Valid code.txt", "w")
+            c.write(" Valid | {} ".format(line.strip("\n")))
             break
         else:
         	print(" Invalid | {} ".format(line.strip("\n")))
