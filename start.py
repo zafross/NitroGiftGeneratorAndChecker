@@ -37,7 +37,7 @@ f=open("Nitro Codes.txt","w", encoding='utf-8')
 print("Wait, Generating for you!")
       
 for n in range(int(num)):
-   y = ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(16))
+   y = ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(19))
    f.write('https://discord.gift/')
    f.write(y)
    f.write("\n")
