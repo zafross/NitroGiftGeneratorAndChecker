@@ -51,12 +51,15 @@ with open("Nitro Codes.txt") as f:
     for line in f:
         nitro = line.strip("\n")
 
-        url = "https://discordapp.com/api/v6/entitlements/gift-codes/" + nitro + "?with_application=false&with_subscription_plan=true"
+        url = "https://discordapp.com/api/v9/entitlements/gift-codes/" + nitro + "?with_application=false&with_subscription_plan=true"
 
         r = requests.get(url)
 
         if r.status_code == 200:
             print(" Valid | {} ".format(line.strip("\n")))
+            f=open("Valid Codes.txt","w", encoding='utf-8')    
+            f.write(line)
+            f.close()
             break
         else:
         	print(" Invalid | {} ".format(line.strip("\n")))
