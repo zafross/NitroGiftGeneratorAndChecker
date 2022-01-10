@@ -1,7 +1,8 @@
-import random, string
-import webbrowser
-import time
+import random
+import string
 import requests
+from threading import Thread
+from time import strftime, gmtime, sleep
 
 print("""
 ███╗░░██╗██╗████████╗██████╗░░█████╗░░░░░░░░██████╗░██╗███████╗████████╗
@@ -9,59 +10,56 @@ print("""
 ██╔██╗██║██║░░░██║░░░██████╔╝██║░░██║█████╗██║░░██╗░██║█████╗░░░░░██║░░░
 ██║╚████║██║░░░██║░░░██╔══██╗██║░░██║╚════╝██║░░╚██╗██║██╔══╝░░░░░██║░░░
 ██║░╚███║██║░░░██║░░░██║░░██║╚█████╔╝░░░░░░╚██████╔╝██║██║░░░░░░░░██║░░░
-╚═╝░░╚══╝╚═╝░░░╚═╝░░░╚═╝░░╚═╝░╚════╝░░░░░░░░╚═════╝░╚═╝╚═╝░░░░░░░░╚═╝░░░
-
-░██████╗░███████╗███╗░░██╗███████╗██████╗░░█████╗░████████╗░█████╗░██████╗░
+╚═╝░░╚══╝╚═╝░░░╚═╝░░░╚═╝░░╚═╝░╚════╝░░░░░░░░╚═════╝░╚═╝╚═╝░░░░░░░░╚═╝░░░    
+░██████╗░███████╗███╗░░██╗███████╗██████╗░░█████╗░████████╗░█████╗░██████╗
 ██╔════╝░██╔════╝████╗░██║██╔════╝██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗██╔══██╗
 ██║░░██╗░█████╗░░██╔██╗██║█████╗░░██████╔╝███████║░░░██║░░░██║░░██║██████╔╝
 ██║░░╚██╗██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██╔══██║░░░██║░░░██║░░██║██╔══██╗
 ╚██████╔╝███████╗██║░╚███║███████╗██║░░██║██║░░██║░░░██║░░░╚█████╔╝██║░░██║
 ░╚═════╝░╚══════╝╚═╝░░╚══╝╚══════╝╚═╝░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░░╚════╝░╚═╝░░╚═╝
-
 ░░░░░░░░█████╗░██╗░░██╗███████╗░█████╗░██╗░░██╗███████╗██████╗░
 ░░██╗░░██╔══██╗██║░░██║██╔════╝██╔══██╗██║░██╔╝██╔════╝██╔══██╗
 ██████╗██║░░╚═╝███████║█████╗░░██║░░╚═╝█████═╝░█████╗░░██████╔╝
 ╚═██╔═╝██║░░██╗██╔══██║██╔══╝░░██║░░██╗██╔═██╗░██╔══╝░░██╔══██╗
 ░░╚═╝░░╚█████╔╝██║░░██║███████╗╚█████╔╝██║░╚██╗███████╗██║░░██║
 ░░░░░░░░╚════╝░╚═╝░░╚═╝╚══════╝░╚════╝░╚═╝░░╚═╝╚══════╝╚═╝░░╚═╝""")
-time.sleep(2)
-print("Creator  -  Zafros ")
-time.sleep(0.3)
-print("https://github.com/Zafros56   \n")
-time.sleep(0.2)
+sleep(0.3)
+print('https://github.com/Zafros56/NitroGiftGeneratorAndChecker')
+sleep(0.3)
+print('Helped to redo: https://github.com/homka122   \n')
+sleep(0.3)
 
-num=input('Input How Many Codes to Generate and Check: ')
-
-f=open("Nitro Codes.txt","w", encoding='utf-8')
-
-print("Wait, Generating for you!")
-
-for n in range(int(num)):
-   y = ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(16))
-   y = ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(19))
-   f.write('https://discord.gift/')
-   f.write(y)
-   f.write("\n")
-f.close()
-
-#=============Checker=========================
+count_threads = 8
+interval = 5
 
 
-with open("Nitro Codes.txt") as f:
-    for line in f:
-        nitro = line.strip("\n")
+def generate_url():
+    return 'https://discord.gift/' + ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(16))
 
-        url = "https://discordapp.com/api/v6/entitlements/gift-codes/" + nitro + "?with_application=false&with_subscription_plan=true"
 
-        r = requests.get(url)
+def checker(nitro):
+    url = "https://discordapp.com/api/v6/entitlements/gift-codes/" + nitro + "?with_application=false&with_subscription_plan=true"
+    r = requests.get(url)
+    if r.status_code == 200:
+        with open('Nitro Codes Valid.txt', 'a') as f:
+            f.write(nitro + '\n')
+        print(" Valid | {} ".format(nitro))
 
-        if r.status_code == 200:
-            print(" Valid | {} ".format(line.strip("\n")))
-            break
-        else:
-        	print(" Invalid | {} ".format(line.strip("\n")))
-input("The end! Press Enter 5 times to close the program.")
-input("4")
-input("3")
-input("2")
-input("1")
+
+def main():
+    while True:
+        checker(generate_url())
+
+
+def main_info():
+    i = 0
+    while True:
+        checker(generate_url())
+        i += 1
+        if i % interval == 0:
+            print(f'[{strftime("%H:%M:%S", gmtime())}] Checked {i * count_threads} codes')
+
+
+for i in range(count_threads-1):
+    Thread(target=main).start()
+Thread(target=main_info).start()
