@@ -34,7 +34,7 @@ interval = 5
 
 
 def generate_url():
-    return 'https://discord.gift/' + ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(16))
+    return 'https://discord.gift/' + ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(19)) # At your request
 
 
 def checker(nitro):
